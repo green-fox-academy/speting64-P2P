@@ -8,7 +8,7 @@ public class MessageController {
 
     @RequestMapping("/")
     public String mainPage(){
-        return "main";
+        return "Peer to Peer App";
     }
 
 
