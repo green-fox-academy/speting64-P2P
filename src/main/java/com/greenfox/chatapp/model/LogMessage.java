@@ -18,7 +18,7 @@ public class LogMessage {
     long id;
     String path;
     String method;
-    String dateAndTime;
+    String createdAt;
     String logLevel;
     String param;
 
@@ -26,14 +26,22 @@ public class LogMessage {
 
     }
 
-    public LogMessage (HttpServletRequest request){
+    public LogMessage(String path, String method, String createdAt , String logLevel , String param){
+        this.path = path;
+        this.method = method;
+        this.createdAt = createdAt;
+        this.logLevel = logLevel;
+        this.param = param;
+    }
+
+   /* public LogMessage (HttpServletRequest request){
 
         this.method = request.getMethod();
         this.path = request.getRequestURI();
-        this.dateAndTime = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.createdAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-ddThh:mm:ss.sss"));
         this.logLevel= System.getenv("CHAT_APP_LOGLEVEL");
         this.param = request.getQueryString();
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -41,7 +49,7 @@ public class LogMessage {
                 "id=" + id +
                 ", path='" + path + '\'' +
                 ", method='" + method + '\'' +
-                ", dateAndTime='" + dateAndTime + '\'' +
+                ", dateAndTime='" + createdAt + '\'' +
                 ", logLevel='" + logLevel + '\'' +
                 ", param='" + param + '\'' +
                 '}';
@@ -71,12 +79,12 @@ public class LogMessage {
         this.method = method;
     }
 
-    public String getDateAndTime() {
-        return dateAndTime;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDateAndTime(String dateAndTime) {
-        this.dateAndTime = dateAndTime;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getLogLevel() {

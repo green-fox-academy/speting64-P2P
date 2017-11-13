@@ -1,21 +1,25 @@
 package com.greenfox.chatapp.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-//@Table(name= "users")
-public class User {
+public class ChatUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String username;
 
-    public User(String username){
+    public ChatUser (String username) {
+
         this.username = username;
+
     }
 
-    public User(){
+    public ChatUser (){
 
     }
 

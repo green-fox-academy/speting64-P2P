@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import javax.servlet.http.HttpServletRequest;
-
 
 @RestController
 public class Restcontroller {
@@ -21,10 +19,10 @@ public class Restcontroller {
     @Autowired
     LogRepo logRepo;
 
-    @RequestMapping(value = "/" , method = RequestMethod.GET)
+   /* @RequestMapping(value = "/" , method = RequestMethod.GET)
     public void log (HttpServletRequest request , Exception e){
-        logService.enviromentCheck(request,e);
+        logService.enviromentCheck(request);
         LogMessage log = new LogMessage();
         logRepo.save(log);
-     }
+     }*/
 }
