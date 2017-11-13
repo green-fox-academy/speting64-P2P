@@ -19,14 +19,13 @@ public class MessageController {
     @Autowired
     LogService logService;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     public String mainPage(){
         return "Peer to Peer App";
-    }
+    }*/
 
     @GetMapping(value = "/main")
-    public String index(HttpServletRequest request , Exception e){
-        logService.enviromentCheck(request,e);
+    public String index(){
         return "main";
     }
 
