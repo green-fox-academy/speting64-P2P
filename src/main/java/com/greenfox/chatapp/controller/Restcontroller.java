@@ -22,10 +22,7 @@ public class Restcontroller {
     LogRepo logRepo;
 
     @RequestMapping(value = "/" , method = RequestMethod.GET)
-    public String log (HttpServletRequest request , Exception e){
+    public void log (HttpServletRequest request , Exception e){
         logService.enviromentCheck(request,e);
-        LogMessage log = new LogMessage(request);
-        logRepo.save(log);
-        return log.toString();
-    }
+         }
 }
