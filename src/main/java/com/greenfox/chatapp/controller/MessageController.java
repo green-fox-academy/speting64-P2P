@@ -24,10 +24,10 @@ public class MessageController {
         return "Peer to Peer App";
     }*/
 
-    @GetMapping(value = "/index")
+    @GetMapping(value = "/main")
     public String index(HttpServletRequest request , Exception e){
         logService.enviromentCheck(request,e);
-        return "index";
+        return "main";
     }
 
 }
