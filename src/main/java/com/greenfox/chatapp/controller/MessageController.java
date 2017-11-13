@@ -18,11 +18,11 @@ public class MessageController {
 
     @Autowired
     LogService logService;
-/*
+
     @RequestMapping("/")
     public String mainPage(){
         return "Peer to Peer App";
-    }*/
+    }
 
     @GetMapping(value = "/main")
     public String index(HttpServletRequest request , Exception e){
