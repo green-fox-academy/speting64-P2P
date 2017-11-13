@@ -24,5 +24,7 @@ public class Restcontroller {
     @RequestMapping(value = "/" , method = RequestMethod.GET)
     public void log (HttpServletRequest request , Exception e){
         logService.enviromentCheck(request,e);
-         }
+        LogMessage log = new LogMessage();
+        logRepo.save(log);
+     }
 }
