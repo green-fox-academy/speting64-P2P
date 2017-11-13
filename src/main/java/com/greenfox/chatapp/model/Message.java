@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Message {
@@ -17,16 +20,21 @@ public class Message {
     long id;
     String username;
     String message;
-    Date messageCreated;
+    Timestamp messageCreated;
 
     long randomId;
 
     public Message(User username , String message){
 
+        this.id = (int) (1000000+Math.random() * 9999999);
         this.username = username.getUsername();
         this.message = message;
-        this.messageCreated = messageCreated;
+        this.messageCreated = Timestamp.valueOf(LocalDateTime.now());
         this.randomId = randomId;
+
+    }
+
+    public Message () {
 
     }
 
@@ -58,7 +66,7 @@ public class Message {
         return messageCreated;
     }
 
-    public void setMessageCreated(Date messageCreated) {
+    public void setMessageCreated(Timestamp messageCreated) {
         this.messageCreated = messageCreated;
     }
 

@@ -39,6 +39,10 @@ public class UserService {
         return new ChatUser();
     }
 
+    public void addNewUser(ChatUser user){
+        userRepo.save(user);
+    }
+
     public void saveDataBase(ChatUser user){
         userRepo.save(user);
     }

@@ -19,10 +19,9 @@ public class Restcontroller {
     @Autowired
     LogRepo logRepo;
 
-   /* @RequestMapping(value = "/" , method = RequestMethod.GET)
-    public void log (HttpServletRequest request , Exception e){
+   @RequestMapping(value = "/" , method = RequestMethod.GET)
+    public void log (HttpServletRequest request){
         logService.enviromentCheck(request);
-        LogMessage log = new LogMessage();
-        logRepo.save(log);
-     }*/
+
+     }
 }

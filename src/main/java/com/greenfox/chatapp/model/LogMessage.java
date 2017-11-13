@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
@@ -34,25 +34,18 @@ public class LogMessage {
         this.param = param;
     }
 
-   /* public LogMessage (HttpServletRequest request){
+    public LogMessage (HttpServletRequest request){
 
         this.method = request.getMethod();
         this.path = request.getRequestURI();
-        this.createdAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-ddThh:mm:ss.sss"));
+        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
         this.logLevel= System.getenv("CHAT_APP_LOGLEVEL");
         this.param = request.getQueryString();
-    }*/
+    }
 
     @Override
     public String toString() {
-        return "LogMessage{" +
-                "id=" + id +
-                ", path='" + path + '\'' +
-                ", method='" + method + '\'' +
-                ", dateAndTime='" + createdAt + '\'' +
-                ", logLevel='" + logLevel + '\'' +
-                ", param='" + param + '\'' +
-                '}';
+        return createdAt + " " + logLevel + " " + path + " " + method + " " + param;
     }
 
     public long getId() {
