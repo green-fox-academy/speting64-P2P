@@ -19,9 +19,4 @@ public class Restcontroller {
     @Autowired
     LogRepo logRepo;
 
-   @RequestMapping(value = "/" , method = RequestMethod.GET)
-    public void log (HttpServletRequest request){
-        logService.enviromentCheck(request);
-
-     }
 }

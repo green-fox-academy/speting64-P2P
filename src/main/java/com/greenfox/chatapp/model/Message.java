@@ -8,7 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.time.LocalDateTime;
 
@@ -18,24 +19,31 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
-    String username;
-    String message;
-    Timestamp messageCreated;
+    String userName;
+    String text;
+    String messageCreated;
 
     long randomId;
 
-    public Message(User username , String message){
+    public Message(String userName , String text){
 
-        this.id = (int) (1000000+Math.random() * 9999999);
-        this.username = username.getUsername();
-        this.message = message;
-        this.messageCreated = Timestamp.valueOf(LocalDateTime.now());
-        this.randomId = randomId;
+        this.id = randomId();
+        this.userName = userName;
+        this.text = text;
+        this.messageCreated = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
 
     }
 
     public Message () {
 
+        this.id = randomId();
+        this.messageCreated = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+
+    }
+
+    public Long randomId() {
+        long id = ThreadLocalRandom.current().nextLong(1000000,9999999);
+        return id;
     }
 
     public long getId() {
@@ -47,26 +55,26 @@ public class Message {
     }
 
     public String getUserName() {
-        return username;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        this.username = username;
+        this.userName = userName;
     }
 
-    public String getMessage() {
-        return message;
+    public String getText() {
+        return text;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Date getMessageCreated() {
+    public String getMessageCreated() {
         return messageCreated;
     }
 
-    public void setMessageCreated(Timestamp messageCreated) {
+    public void setMessageCreated(String messageCreated) {
         this.messageCreated = messageCreated;
     }
 

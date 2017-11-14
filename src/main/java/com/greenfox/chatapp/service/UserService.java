@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.*;
 
 
-
-
 @Service
 public class UserService {
 
@@ -21,7 +19,7 @@ public class UserService {
 
     }
 
-    public List <ChatUser> getAllUser(){
+    public List <ChatUser> getAllChatUser(){
         List<ChatUser> users = new ArrayList<>();
         userRepo.findAll().forEach(users::add);
         return users;
@@ -35,12 +33,33 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public ChatUser getNewUser(){
+    public ChatUser getChatUser() {
+        return userRepo.findOne(1L);
+    }
+
+    public ChatUser findChatUserById(long id){
+        return userRepo.findOne(id);
+    }
+
+    public Iterable<ChatUser> findAllChatUsers(){
+        return userRepo.findAll();
+    }
+
+    public ChatUser getNewChatUser(){
         return new ChatUser();
     }
 
-    public void addNewUser(ChatUser user){
+    public void addNewChatUser(ChatUser user){
         userRepo.save(user);
+    }
+
+
+    public void updateChatUser(ChatUser user){
+        userRepo.save(user);
+    }
+
+    public void deleteChatUser(long id){
+        userRepo.delete(id);
     }
 
     public void saveDataBase(ChatUser user){

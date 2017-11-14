@@ -1,26 +1,25 @@
 package com.greenfox.chatapp.controller;
 
 import com.greenfox.chatapp.model.ChatUser;
+import com.greenfox.chatapp.model.Message;
 import com.greenfox.chatapp.repository.LogRepo;
+import com.greenfox.chatapp.repository.MessageRepo;
 import com.greenfox.chatapp.repository.UserRepo;
 import com.greenfox.chatapp.service.LogService;
+import com.greenfox.chatapp.service.MessageService;
 import com.greenfox.chatapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.size;
+
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MessageController {
-
-    @Autowired
-    LogRepo logRepo;
 
     @Autowired
     LogService logService;
@@ -31,35 +30,34 @@ public class MessageController {
     @Autowired
     UserService userService;
 
-    /*@RequestMapping("/")
-    public String mainPage(){
-        return "Peer to Peer App";
-    }*/
+    @Autowired
+    MessageService messageService;
 
-    /*@GetMapping(value = "/main")
-    public String index(){
-        return "main";
-    }
+    @Autowired
+    MessageRepo messageRepo;
 
-    @RequestMapping("/")
-    public String getHomepage(Model model) {
-        model.addAttribute("listUser", userRepo.findAll());
-        return "main";
-    }*/
 
-    @GetMapping(value = "/main")
-    public String chatLog(HttpServletRequest request) {
+    @GetMapping(value = "/")
+    public String index(Model model, HttpServletRequest request) {
         logService.enviromentCheck(request);
-        return "main";
+        if(size(userRepo.findAll())==0){
+            return "enter";
+        }else{
+            logService.enviromentCheck(request);
+            model.addAttribute("user" ,userService.getChatUser());// userService.findChatUserById(1L));
+            model.addAttribute("message" , messageRepo.findAll());
+            return "main";
+        }
     }
 
-    @PostMapping("/update")
-    public String updateEntry(@ModelAttribute ChatUser user, Model model){
-        model.addAttribute("newUser", user);
-        if (user.getUsername().equals("")) {
+    @PostMapping("/add")
+    public String updateEntry(@ModelAttribute ChatUser user, Model model , HttpServletRequest request){
+        logService.enviromentCheck(request);
+        //model.addAttribute("newUser", user);
+        if (user.getName().equals("")) {
             model.addAttribute("errorMessage", "Add username plzzzz");
             return "enter";
-        } else if (user.getUsername().equals("foulmouth")) {
+        } else if (user.getName().equals("foulmouth")) {
             model.addAttribute("errorMessage2","Bad bad user");
             return "enter";
         }
@@ -67,10 +65,33 @@ public class MessageController {
         return "redirect:/";
     }
 
-    @RequestMapping("/enter")
-    public String getEnterPage(Model model) {
-        model.addAttribute("newUser", userService.getNewUser());
+    @GetMapping("/enter")
+    public String getEnterPage(Model model ,  HttpServletRequest request){
+        logService.enviromentCheck(request);
         return "enter";
     }
+
+    @PostMapping("/save")
+    public String saveChatUser (@RequestParam String name ,  HttpServletRequest request){
+        logService.enviromentCheck(request);
+        userRepo.save(new ChatUser(name));
+        return "redirect:/";
+    }
+
+    @PostMapping(value = "/updateuser")
+    public String updatePost(HttpServletRequest request, @ModelAttribute ChatUser user) {
+        logService.enviromentCheck(request);
+        userRepo.save(user);
+        return "redirect:/";
+    }
+
+    @PostMapping("/savemessage")
+    public String messageIndex(HttpServletRequest request, @ModelAttribute Message message,
+                               @RequestParam(value = "text") String text){
+        logService.enviromentCheck(request);
+        messageRepo.save(new Message(userService.getChatUser().getName(),text));
+        return "redirect:/";
+    }
+
 
 }

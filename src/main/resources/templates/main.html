@@ -7,13 +7,35 @@
 </head>
 <body>
  <h1>Peer to Peer Application</h1>
- <p> USERNAME </p>
+
 <table>
-    <th:block th:each = "users : ${listUser}">
-        <tr>
-            <td th:text = "${users.getUserName()}">Enter</td>
-        </tr>
-    </th:block>
+
+    <form action="/updateuser" th:object="${user}" method="post">
+        <input type = "hidden" th:field="*{id}"/>
+        <input type = "text" th:field = "*{name}" th:placeholder= "*{name}" />
+        <button type="submit" value="Submit">Update</button>
+    </form>
+
+    <div>
+    <ul>
+        <li>App</li>
+        <span>Hi there! Submit your message using the send button!</span>
+    </ul>
+    </div>
+
+    <div>
+        <ul th:each="message:${messages}">
+            <li th:text="${message.userName}"></li>
+            <span th:text="${message.text}"></span>
+        </ul>
+    </div>
+
+    <form action = "/savemessage" method="post">
+        <textarea th:value="*{text}" name="text"></textarea>
+        <br /> <button type="submit" value="submit">Send</button>
+    </form>
+
+
 </table>
 
 

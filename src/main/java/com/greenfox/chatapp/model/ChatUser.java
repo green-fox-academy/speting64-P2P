@@ -11,11 +11,11 @@ public class ChatUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
-    String username;
+    String name;
 
-    public ChatUser (String username) {
+    public ChatUser (String name) {
 
-        this.username = username;
+        this.name = name;
 
     }
 
@@ -31,11 +31,11 @@ public class ChatUser {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 }
