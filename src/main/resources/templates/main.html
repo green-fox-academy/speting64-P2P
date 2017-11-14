@@ -43,16 +43,7 @@
         </tbody>
     </table>
 </table>
-<!--
 
-    <div>
-        <ul th:each="message:${messages}">
-
-            <li th:text="${message.getuserName()}"></li>
-            <span th:text="${message.getText()}"></span>
-        </ul>
-    </div>
--->
     <form action = "/savemessage" method="post">
         <textarea th:value="*{text}" name="text"></textarea>
         <br /> <button type="submit" value="submit">Send</button>

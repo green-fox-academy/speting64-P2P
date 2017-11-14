@@ -45,7 +45,7 @@ public class MessageController {
         }else{
             logService.enviromentCheck(request);
             model.addAttribute("user" ,userService.getChatUser());
-            model.addAttribute("message" , messageRepo.findAll());
+            model.addAttribute("messages" , messageRepo.findAll());
             return "main";
         }
     }
@@ -74,6 +74,7 @@ public class MessageController {
     public String messageIndex(HttpServletRequest request, @ModelAttribute Message message,
                                @RequestParam(value = "text") String text){
         logService.enviromentCheck(request);
+
         messageRepo.save(new Message(userService.getChatUser().getName(),text));
         return "redirect:/";
     }
