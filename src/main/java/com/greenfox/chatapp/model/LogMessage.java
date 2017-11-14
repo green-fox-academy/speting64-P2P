@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class LogMessage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String path;
     String method;

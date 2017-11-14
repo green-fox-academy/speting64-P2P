@@ -44,25 +44,10 @@ public class MessageController {
             return "enter";
         }else{
             logService.enviromentCheck(request);
-            model.addAttribute("user" ,userService.getChatUser());// userService.findChatUserById(1L));
+            model.addAttribute("user" ,userService.getChatUser());
             model.addAttribute("message" , messageRepo.findAll());
             return "main";
         }
-    }
-
-    @PostMapping("/add")
-    public String updateEntry(@ModelAttribute ChatUser user, Model model , HttpServletRequest request){
-        logService.enviromentCheck(request);
-        //model.addAttribute("newUser", user);
-        if (user.getName().equals("")) {
-            model.addAttribute("errorMessage", "Add username plzzzz");
-            return "enter";
-        } else if (user.getName().equals("foulmouth")) {
-            model.addAttribute("errorMessage2","Bad bad user");
-            return "enter";
-        }
-        userService.saveDataBase(user);
-        return "redirect:/";
     }
 
     @GetMapping("/enter")
