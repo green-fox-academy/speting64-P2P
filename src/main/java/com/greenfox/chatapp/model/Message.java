@@ -57,7 +57,6 @@ public class Message {
         return randId;
     }
 
-
     public Long getId() {
         return id;
     }

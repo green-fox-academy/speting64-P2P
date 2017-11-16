@@ -53,7 +53,6 @@ public class UserService {
         userRepo.save(user);
     }
 
-
     public void updateChatUser(ChatUser user){
         userRepo.save(user);
     }

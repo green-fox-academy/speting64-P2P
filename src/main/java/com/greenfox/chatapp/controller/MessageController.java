@@ -89,14 +89,4 @@ public class MessageController {
         messageRepo.save(new Message(userService.getChatUser().getName(),text));
         return "redirect:/";
     }
-
-    /*@PostMapping("/messages/send")
-    public String sendMessage(@ModelAttribute Message message){
-        message.setUserName(userService.getChatUser().getName());
-        messageService.saveDataBase(message);
-        messageService.sendMessage(message);
-        return "redirect:/";
-    }*/
-
-
 }
