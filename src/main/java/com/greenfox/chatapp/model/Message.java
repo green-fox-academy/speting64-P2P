@@ -1,5 +1,6 @@
 package com.greenfox.chatapp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.catalina.User;
 
 
@@ -18,40 +19,51 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Id
-    int id;
+    @JsonProperty(value = "id")
+    Long id;
+    @JsonProperty(value = "username")
     String userName;
+    @JsonProperty(value = "text")
     String text;
-    String messageCreated;
+    @JsonProperty(value = "timestamp")
+    Timestamp timestamp;
 
-    public Message () {
+    public Message() {
 
         this.id = randProvider();
-        this.messageCreated = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        this.timestamp = new Timestamp(System.currentTimeMillis());
 
     }
 
-    public Message(String userName , String text){
+    public Message(String userName, String text) {
 
         this.id = randProvider();
         this.userName = userName;
         this.text = text;
-        this.messageCreated = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        this.timestamp = new Timestamp(System.currentTimeMillis());
 
     }
 
-    public int randProvider(){
+    public Message(Long id, String userName, String text, Timestamp timestamp) {
+        this.id = id;
+        this.userName = userName;
+        this.text = text;
+        this.timestamp = timestamp;
+    }
+
+    public Long randProvider() {
         Random rand = new Random();
-        int randId = rand.nextInt(9999999) + 1000000;
+        long randId = rand.nextInt(9999999) + 1000000;
         return randId;
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId() {
-        this.id = randProvider();
+    public void setId(Long Id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -70,12 +82,12 @@ public class Message {
         this.text = text;
     }
 
-    public String getMessageCreated() {
-        return messageCreated;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setMessageCreated(String messageCreated) {
-        this.messageCreated = messageCreated;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
 }

@@ -24,10 +24,10 @@ public class Client {
         this.id = id;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Client{" +
                 "id='" + id + '\'' +
                 '}';
-    }
+    }*/
 }

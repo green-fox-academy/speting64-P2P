@@ -9,12 +9,23 @@ public class ResponseMessage {
     String status;
     String message;
 
+    public ResponseMessage() {
+
+    }
+
+    public ResponseMessage(String status , String message){
+        this.status = status;
+        this.message = message;
+
+    }
+
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+
     }
 
     public String getMessage() {
@@ -25,3 +36,4 @@ public class ResponseMessage {
         this.message = message;
     }
 }
+

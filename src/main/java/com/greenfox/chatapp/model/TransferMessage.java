@@ -12,6 +12,14 @@ public class TransferMessage {
 
     }
 
+    public TransferMessage(Message message , Client client){
+
+        this.message=message;
+        this.client=client;
+
+
+    }
+
     public Message getMessage() {
         return message;
     }
@@ -28,11 +36,4 @@ public class TransferMessage {
         this.client = client;
     }
 
-    @Override
-    public String toString() {
-        return "TransferMessage{" +
-                "message=" + message +
-                ", client=" + client +
-                '}';
-    }
 }
